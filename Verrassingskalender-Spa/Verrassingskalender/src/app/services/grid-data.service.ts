@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
+import { CellContent } from '../models/cell-enum.model';
 import { ScratchGrid } from '../models/scratch-grid.model';
 
 @Injectable({
@@ -13,5 +14,14 @@ export class GridDataService {
 
   getGrid(): Observable<ScratchGrid> {
     return this.httpClient.get<ScratchGrid>(`${this.baseUrl}/api/grid`);
+  }
+
+  scratchCell(cellId: number) {
+    return this.httpClient.post<CellContent>(
+      `${this.baseUrl}/api/grid/scratch`,
+      {
+        id: cellId,
+      }
+    );
   }
 }

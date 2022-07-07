@@ -1,3 +1,30 @@
-<div *ngFor="let cell of scratchGrid?.cells; let index">
-  <span>{{ cell.id }}</span>
+<div class="legend">
+  <div class="d-flex p-1">
+    <div class="tile-small empty d-flex"></div>
+    <span> Dit betekend het vakje nog niet uitgekrast is.</span>
+  </div>
+  <div class="d-flex p-1">
+    <div class="tile-small no-prize"></div>
+    <span> Dit betekend dat er geen prijs is in het vakje.</span>
+  </div>
+  <div class="d-flex p-1">
+    <div class="tile-small consulation-prize"></div>
+    <span> Dit betekend dat er een €100 prijs gekrast is in het vakje.</span>
+  </div>
+  <div class="d-flex p-1">
+    <div class="tile-small grand-prize"></div>
+    <span>
+      Dit betekend dat de hoofdprijs van €25000 prijs gekrast is in het
+      vakje!</span
+    >
+  </div>
 </div>
+
+<mat-grid-list cols="100" rowHeight="2:1">
+  <mat-grid-tile
+    (click)="scratchCellWithId(cell.id)"
+    class="hover-scratch-cell"
+    *ngFor="let cell of cells; let i = index"
+    >{{ i < 100 ? i : null }}</mat-grid-tile
+  >
+</mat-grid-list>

@@ -29,7 +29,7 @@ export class LandingPageComponent implements OnInit {
     this.nameForm.controls.name.markAsDirty();
     if (this.nameForm.valid) {
       this.appStateService.setName(this.nameForm.controls.name.value);
-      this.router.navigateByUrl('./scratchgrid');
+      this.router.navigateByUrl('scratchgrid');
     }
   }
 }

@@ -1,0 +1,24 @@
+mat-grid-tile {
+  border: 1px solid black;
+}
+
+.hover-scratch-cell {
+  cursor: pointer;
+}
+.empty {
+  border: 1px solid black;
+}
+.no-prize {
+  background-color: grey;
+}
+.consulation-prize {
+  background-color: green;
+}
+.grand-prize {
+  background-color: yellow;
+}
+
+.tile-small {
+  height: 20px;
+  width: 20px;
+}

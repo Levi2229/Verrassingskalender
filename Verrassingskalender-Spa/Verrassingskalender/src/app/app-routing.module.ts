@@ -9,7 +9,7 @@ const routes: Routes = [
     component: LandingPageComponent,
   },
   {
-    path: './scratchgrid',
+    path: 'scratchgrid',
     component: GridContainerComponent,
   },
 ];

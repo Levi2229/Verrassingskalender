@@ -9,7 +9,11 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("*");
+                          // Not secure, but for test app this is not an issue.
+                          policy.WithOrigins("*")
+                          .AllowAnyOrigin()
+                         .AllowAnyMethod()
+                         .AllowAnyHeader();
                       });
 });
 
