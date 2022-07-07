@@ -1,10 +1,10 @@
 export interface GridItem {
+  isRevealed: boolean;
   content: GridContent;
 }
 
 export enum GridContent {
-  unrevealed = 'unrevealed',
-  empty = 'empty',
+  noPrize = 'noPrize',
   consolationPrize = 'consolationPrize',
   grandPrize = 'grandPrize',
 }
