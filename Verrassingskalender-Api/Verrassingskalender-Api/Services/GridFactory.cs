@@ -16,7 +16,10 @@ namespace Verrassingskalender_Api.Services
             {
                 if (indicesToAddConsulationPrize.Contains(i))
                 {
-                    grid.Cells.Add(new Cell(i, GridContent.ConsolationPrize));
+                    grid.Cells.Add(new Cell(i, CellContent.ConsolationPrize));
+                } else
+                {
+                    grid.Cells.Add(new Cell(i, CellContent.NoPrize));
                 }
             }
             grid = AddGrandPrize(grid);
@@ -25,7 +28,7 @@ namespace Verrassingskalender_Api.Services
 
         private static Grid AddGrandPrize(Grid grid)
         {
-            var noPrizeCells = grid.Cells.Where(c => c.GridContent == GridContent.NoPrize).ToArray();
+            var noPrizeCells = grid.Cells.Where(c => c.CellContent == CellContent.NoPrize).ToArray();
             var random = new Random().Next(noPrizeCells.Count());
             var cellWithRandomId = noPrizeCells.ElementAt(random);
             //var cellAtRandomId = noPrizeCells.SingleOrDefault(npc => npc.Id == cellWithRandomId.Id);
@@ -35,7 +38,7 @@ namespace Verrassingskalender_Api.Services
                 throw new Exception($"There is no cell for number: {random}");
             }
 
-            cellWithRandomId.GridContent = GridContent.GrandPrize;
+            cellWithRandomId.CellContent = CellContent.GrandPrize;
             return grid;
         }
 

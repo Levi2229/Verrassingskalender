@@ -1,6 +1,6 @@
 ﻿namespace Verrassingskalender_Api.Models.Enums
 {
-    public enum GridContent
+    public enum CellContent
     {
         NoPrize,
         ConsolationPrize,
