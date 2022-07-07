@@ -11,9 +11,10 @@ import { MaterialModule } from 'src/material.module';
 import { HeaderComponent } from './components/header/header.component';
 import { SiteContainerComponent } from './components/site-container/site-container.component';
 import { SocialsComponent } from './components/socials/socials.component';
+import { GridContainerComponent } from './components/grid/grid-container/grid-container.component';
 
 @NgModule({
-  declarations: [AppComponent, LandingPageComponent, HeaderComponent, SiteContainerComponent, SocialsComponent],
+  declarations: [AppComponent, LandingPageComponent, HeaderComponent, SiteContainerComponent, SocialsComponent, GridContainerComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -27,7 +27,6 @@ export class LandingPageComponent implements OnInit {
 
   tryNavigateToScratchGrid() {
     this.nameForm.controls.name.markAsDirty();
-    var hasError = this.nameForm.controls.name.hasError('required');
     if (this.nameForm.valid) {
       this.appStateService.setName(this.nameForm.controls.name.value);
       this.router.navigateByUrl('./scratchgrid');
