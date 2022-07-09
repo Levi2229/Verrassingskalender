@@ -4,11 +4,8 @@ namespace Verrassingskalender_Api.Models.Enums
 {
     public enum CellContent
     {
-        [Description("NoPrize")]
-        NoPrize,
-        [Description("ConsolationPrize")]
-        ConsolationPrize,
-        [Description("GrandPrize")]
-        GrandPrize
+        NoPrize = 0,
+        ConsolationPrize = 1,
+        GrandPrize = 2
     }
 }

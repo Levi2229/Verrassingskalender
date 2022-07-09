@@ -6,6 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { CellContent } from 'src/app/models/cell-enum.model';
 import { PrizeRevealDialogComponent } from '../prize-reveal-dialog/prize-reveal-dialog.component';
 import { Router } from '@angular/router';
+import { Cell } from 'src/app/models/cell.model';
+import { finalize } from 'node_modules/rxjs';
 
 @Component({
   selector: 'app-grid-container',
@@ -29,12 +31,15 @@ export class GridContainerComponent implements OnInit {
 
     if (!this.playerName) {
       this.router.navigateByUrl('');
+      return;
     }
 
-    this.gridDataService.getGrid().subscribe((result) => {
-      this.originalGrid = result;
-      this.hasLoaded = true;
-    });
+    this.gridDataService
+      .getGrid()
+      .pipe(finalize(() => (this.hasLoaded = true)))
+      .subscribe((result) => {
+        this.originalGrid = result;
+      });
   }
 
   scratchCellWithId(cellId: number) {
@@ -53,6 +58,17 @@ export class GridContainerComponent implements OnInit {
         cellAtPosition.cellContent = result;
         this.openDialog('2500', '2500', result);
       });
+  }
+
+  public getClassForCell(cell: Cell): string {
+    switch (cell.cellContent) {
+      case CellContent.consolationPrize:
+        return 'consolation-prize';
+      case CellContent.grandPrize:
+        return 'grand-prize';
+      case CellContent.noPrize:
+        return 'no-prize';
+    }
   }
 
   public get cells() {

@@ -20,13 +20,13 @@ export class PrizeRevealDialogComponent {
   get readableStringFromCellContent(): string {
     switch (this.prize) {
       case CellContent.consolationPrize:
-        return 'Gefeliciteerd, u heeft de troostprijs van €100 gewonnen!';
+        return 'Gefeliciteerd, u heeft een prijs van €100 gewonnen!';
       case CellContent.grandPrize:
         return 'Gefeliciteerd, u heeft de hoofdprijs van €25000 gewonnen!';
       case CellContent.noPrize:
         return 'Helaas, u heeft geen prijs gewonnen.';
+      default:
+        return 'Er is iets misgegaan.';
     }
-
-    return '';
   }
 }

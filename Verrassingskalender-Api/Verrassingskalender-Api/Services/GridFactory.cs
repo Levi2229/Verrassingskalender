@@ -24,10 +24,10 @@ namespace Verrassingskalender_Api.Services
             {
                 if (indicesToAddConsulationPrize.Contains(i))
                 {
-                    grid.Cells.Add(new Cell(i, CellContent.ConsolationPrize));
+                    grid.Cells.Add(new Cell(CellContent.ConsolationPrize));
                 } else
                 {
-                    grid.Cells.Add(new Cell(i, CellContent.NoPrize));
+                    grid.Cells.Add(new Cell(CellContent.NoPrize));
                 }
             }
             grid = AddGrandPrize(grid);

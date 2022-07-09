@@ -9,7 +9,7 @@ namespace Verrassingskalender_Api.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Grids",
+                name: "Grid",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -17,11 +17,11 @@ namespace Verrassingskalender_Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Grids", x => x.Id);
+                    table.PrimaryKey("PK_Grid", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Players",
+                name: "Player",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -30,11 +30,11 @@ namespace Verrassingskalender_Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Players", x => x.Id);
+                    table.PrimaryKey("PK_Player", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cells",
+                name: "Cell",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -45,40 +45,40 @@ namespace Verrassingskalender_Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cells", x => x.Id);
+                    table.PrimaryKey("PK_Cell", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Cells_Grids_GridId",
+                        name: "FK_Cell_Grid_GridId",
                         column: x => x.GridId,
-                        principalTable: "Grids",
+                        principalTable: "Grid",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Cells_Players_PlayerId",
+                        name: "FK_Cell_Player_PlayerId",
                         column: x => x.PlayerId,
-                        principalTable: "Players",
+                        principalTable: "Player",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cells_GridId",
-                table: "Cells",
+                name: "IX_Cell_GridId",
+                table: "Cell",
                 column: "GridId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cells_PlayerId",
-                table: "Cells",
+                name: "IX_Cell_PlayerId",
+                table: "Cell",
                 column: "PlayerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Cells");
+                name: "Cell");
 
             migrationBuilder.DropTable(
-                name: "Grids");
+                name: "Grid");
 
             migrationBuilder.DropTable(
-                name: "Players");
+                name: "Player");
         }
     }
 }

@@ -14,25 +14,29 @@ namespace Verrassingskalender_Api.Database
 
         public async Task<Grid> GetGrid(int id)
         {
-            var Grid = await _context.Grid
+            // Verklaring: Id nu niet in gebruik omdat we nu even uigaan van 1 grid in DB want we kunnen toch niet wisselen.
+            var grid = await _context.Grid
                 .Include(g => g.Cells)
                     .ThenInclude(c => c.Player)
-                .SingleOrDefaultAsync(g => g.Id == id);
+                .FirstOrDefaultAsync();
 
-            if (Grid == null)
+            if (grid == null)
             {
+                // Improvement: normally this would be logged to gain insight into production and debug capabilities.
                 throw new Exception($"Grid with id {id} not found ");
             }
-            return Grid;
+            return grid;
         }
 
         public async Task<Cell> GetCell(int cellId, string playerName)
         {
             var cell = await _context.Cell.SingleOrDefaultAsync(c => c.Id == cellId);
-
-            cell!.Player = new Player(playerName);
+            if (cell == null)
+            {
+                // Improvement: normally this would be logged to gain insight into production and debug capabilities.
+                throw new Exception($"Cell with id {cellId} not found.");
+            }
             return cell;
-            //await _context.SaveChangesAsync();
         }
     }
 }

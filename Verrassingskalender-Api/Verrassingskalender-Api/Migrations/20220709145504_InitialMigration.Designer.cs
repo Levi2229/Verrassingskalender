@@ -12,8 +12,8 @@ using Verrassingskalender_Api.Database;
 namespace Verrassingskalender_Api.Migrations
 {
     [DbContext(typeof(VerrassingsKalenderContext))]
-    [Migration("20220709143607_MadeKeysAutoIncrement")]
-    partial class MadeKeysAutoIncrement
+    [Migration("20220709145504_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

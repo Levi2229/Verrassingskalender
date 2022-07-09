@@ -12,9 +12,8 @@ namespace Verrassingskalender_Api.Models
         public CellContent CellContent { get; set; }
         public Player? Player { get; set; }
 
-        public Cell(int id, CellContent cellContent)
+        public Cell(CellContent cellContent)
         {
-            Id = id;
             CellContent = cellContent;
         }
     }
