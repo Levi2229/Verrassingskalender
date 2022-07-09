@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using Verrassingskalender_Api.Database;
 using Verrassingskalender_Api.Services;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -17,11 +19,19 @@ builder.Services.AddCors(options =>
                       });
 });
 
+var folder = Environment.SpecialFolder.LocalApplicationData;
+var path = Environment.GetFolderPath(folder);
+var DbPath = System.IO.Path.Join(path, "VerrassingsKalender.db");
+
+builder.Services.AddDbContext<VerrassingsKalenderContext>(
+        options => options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=VerrassingsKalender"));
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IGridFactory, GridFactory>();
+builder.Services.AddScoped<IVerrassingsKalenderRepository, VerrassingsKalenderRepository>();
 builder.Services.AddScoped<IGridService, GridService>();
 
 var app = builder.Build();

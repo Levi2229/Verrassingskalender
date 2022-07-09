@@ -16,11 +16,12 @@ export class GridDataService {
     return this.httpClient.get<ScratchGrid>(`${this.baseUrl}/api/grid`);
   }
 
-  scratchCell(cellId: number) {
+  scratchCell(cellId: number, playerName: string) {
     return this.httpClient.post<CellContent>(
-      `${this.baseUrl}/api/grid/scratch`,
+      `${this.baseUrl}/api/grid/scratchGridCell`,
       {
-        id: cellId,
+        cellId,
+        playerName,
       }
     );
   }

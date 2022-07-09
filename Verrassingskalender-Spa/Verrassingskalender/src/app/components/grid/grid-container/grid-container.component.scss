@@ -3,7 +3,10 @@ mat-grid-tile {
 }
 
 .hover-scratch-cell {
-  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+    border: 2px solid black;
+  }
 }
 .empty {
   border: 1px solid black;

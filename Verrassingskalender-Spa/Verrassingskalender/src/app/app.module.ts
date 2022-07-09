@@ -12,9 +12,11 @@ import { HeaderComponent } from './components/header/header.component';
 import { SiteContainerComponent } from './components/site-container/site-container.component';
 import { SocialsComponent } from './components/socials/socials.component';
 import { GridContainerComponent } from './components/grid/grid-container/grid-container.component';
+import { PrizeRevealComponent } from './components/grid/prize-reveal/prize-reveal.component';
+import { PrizeRevealDialogComponent } from './components/grid/prize-reveal-dialog/prize-reveal-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, LandingPageComponent, HeaderComponent, SiteContainerComponent, SocialsComponent, GridContainerComponent],
+  declarations: [AppComponent, LandingPageComponent, HeaderComponent, SiteContainerComponent, SocialsComponent, GridContainerComponent, PrizeRevealComponent, PrizeRevealDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

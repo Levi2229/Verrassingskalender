@@ -5,6 +5,6 @@ namespace Verrassingskalender_Api.Services
 {
     public interface IGridFactory
     {
-        public Grid GenerateGrid();
+        public Task<Grid> GenerateGrid();
     }
 }

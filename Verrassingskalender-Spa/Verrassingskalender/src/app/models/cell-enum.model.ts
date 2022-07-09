@@ -1,5 +1,5 @@
 export enum CellContent {
-  noPrize = 'noPrize',
-  consolationPrize = 'consolationPrize',
-  grandPrize = 'grandPrize',
+  noPrize = 0,
+  consolationPrize = 1,
+  grandPrize = 2,
 }

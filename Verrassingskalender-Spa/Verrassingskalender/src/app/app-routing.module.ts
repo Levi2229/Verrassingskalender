@@ -3,6 +3,7 @@ import { GridContainerComponent } from './components/grid/grid-container/grid-co
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+//TODO for technical improvement/clarity: router names as constants.
 const routes: Routes = [
   {
     path: '',

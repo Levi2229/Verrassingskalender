@@ -5,8 +5,8 @@ namespace Verrassingskalender_Api.Services
 {
     public interface IGridService
     {
-        public CellContent ScratchGridCell(int id, string playerName);
+        public Task<CellContent> ScratchGridCell(ScratchGridCellRequest scratchGridCellRequest);
 
-        public GridViewModel GetGridViewModel();
+        public Task<GridViewModel> GetGridViewModel();
     }
 }

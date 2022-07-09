@@ -1,4 +1,5 @@
-﻿using Verrassingskalender_Api.Models;
+﻿using Verrassingskalender_Api.Database;
+using Verrassingskalender_Api.Models;
 using Verrassingskalender_Api.Models.Enums;
 
 namespace Verrassingskalender_Api.Services
@@ -8,7 +9,14 @@ namespace Verrassingskalender_Api.Services
         private static readonly int GridLength = 10000;
         private static readonly int AmountOfConsulationPrizes = 100;
 
-        public Grid GenerateGrid()
+        public VerrassingsKalenderContext _verrassingsKalenderContext { get; }
+
+        public GridFactory(VerrassingsKalenderContext verrassingsKalenderContext)
+        {
+            _verrassingsKalenderContext = verrassingsKalenderContext;
+        }
+
+        public async Task<Grid> GenerateGrid()
         {
             var grid = new Grid();
             var indicesToAddConsulationPrize = GetUniqueRandomNumbersInRange(0, GridLength, AmountOfConsulationPrizes);
@@ -23,6 +31,10 @@ namespace Verrassingskalender_Api.Services
                 }
             }
             grid = AddGrandPrize(grid);
+
+            _verrassingsKalenderContext.Grid.Add(grid);
+            await _verrassingsKalenderContext.SaveChangesAsync();
+
             return grid;
         }
 
