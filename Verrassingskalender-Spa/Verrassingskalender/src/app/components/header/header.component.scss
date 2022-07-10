@@ -1,0 +1,13 @@
+.image-banner {
+  width: 11rem;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.banner {
+  margin-bottom: 0.3rem;
+
+  .banner-shadow {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12) !important;
+  }
+}

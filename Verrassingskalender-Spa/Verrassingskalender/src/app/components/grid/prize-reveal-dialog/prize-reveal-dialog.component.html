@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>{{ readableStringFromCellContent }}</h1>
+<img
+  *ngIf="
+    prize === cellContentEnum.consolationPrize ||
+    prize === cellContentEnum.grandPrize
+  "
+  src="https://thumbs.gfycat.com/CrazyAridHammerkop-size_restricted.gif"
+/>
+<button
+  class="m-auto d-flex ml-auto p-2 px-5"
+  mat-stroked-button
+  color="primary"
+  (click)="navigateToLandingPage()"
+>
+  Ga terug
+</button>

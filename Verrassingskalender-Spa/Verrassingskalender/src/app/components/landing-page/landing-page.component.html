@@ -1,1 +1,51 @@
-<p>landing-page works!</p>
+<mat-card class="login-card">
+  <mat-card-title class="text-center">Verassingskalender 2022</mat-card-title>
+  <div class="p-3">
+    <mat-divider></mat-divider>
+  </div>
+  <mat-card-content>
+    <p>
+      {{ resources.landingPage.catchPhrase }}
+    </p>
+    <!-- Note: Ik realiseer me de Security risico's die het gebruik van innerHtml met zich mee kunnen brengen. -->
+    <p [innerHtml]="resources.landingPage.disclaimer"></p>
+    <p>
+      {{ resources.landingPage.odds }}
+    </p>
+    <div class="p-3">
+      <mat-divider></mat-divider>
+    </div>
+    <div class="font-weight-bold pb-1">
+      {{ resources.landingPage.explanationTitle }}
+    </div>
+    <span>
+      {{ resources.landingPage.explanation }}
+    </span>
+    <form class="form" [formGroup]="nameForm">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>{{ resources.formLabels.name }}</mat-label>
+        <input matInput formControlName="name" placeholder="Vul uw naam in" />
+      </mat-form-field>
+      <mat-error
+        *ngIf="
+          nameForm.controls.name.hasError('required') &&
+          (nameForm.controls.name.touched || nameForm.controls.name.dirty)
+        "
+      >
+        {{ resources.formValidationMessage.missingNameError }}
+      </mat-error>
+      <button
+        class="d-flex m-auto p-2 px-5"
+        mat-stroked-button
+        color="primary"
+        (click)="tryNavigateToScratchGrid()"
+      >
+        {{ resources.landingPage.startGame }}
+      </button>
+    </form>
+  </mat-card-content>
+  <div class="p-2">
+    <mat-divider></mat-divider>
+  </div>
+  <app-socials></app-socials>
+</mat-card>
