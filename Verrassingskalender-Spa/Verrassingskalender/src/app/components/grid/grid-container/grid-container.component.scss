@@ -1,11 +1,23 @@
-mat-grid-tile {
-  border: 1px solid black;
-}
-
-.hover-scratch-cell {
+.hover-scratch-cell-small {
   &:hover {
     cursor: pointer;
     border: 2px solid black;
+  }
+}
+
+.hover-scratch-cell-large {
+  height: 50px;
+  width: 50px;
+  display: inline-block;
+  background-color: white;
+  border: 1px solid black;
+  &:hover {
+    cursor: pointer;
+    border: 2px solid black;
+  }
+  .mat-grid-tile-content {
+    margin-bottom: 1px;
+    bottom: 1px;
   }
 }
 .empty {
@@ -13,15 +25,33 @@ mat-grid-tile {
 }
 .no-prize {
   background-color: grey;
+  transition: background-color 0.5s ease-in-out;
 }
 .consolation-prize {
   background-color: green;
+  transition: background-color 0.5s ease-in-out;
 }
 .grand-prize {
   background-color: yellow;
+  transition: background-color 0.5s ease-in-out;
 }
 
 .tile-small {
   height: 20px;
   width: 20px;
+}
+
+.big-grid {
+  width: 10000px;
+  height: fit-content;
+}
+
+.overflow-container {
+  height: 89vh;
+  width: 100vw;
+  overflow: scroll;
+}
+
+mat-grid-tile {
+  border: 1px solid black;
 }

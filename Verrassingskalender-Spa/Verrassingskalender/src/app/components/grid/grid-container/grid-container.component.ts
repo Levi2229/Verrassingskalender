@@ -19,6 +19,7 @@ export class GridContainerComponent implements OnInit, OnDestroy {
   playerName: string | undefined;
   hasLoaded: boolean | undefined;
   subscription: Subscription | undefined;
+  renderSize = 'zoomedIn';
 
   constructor(
     private readonly dialog: MatDialog,
@@ -54,7 +55,7 @@ export class GridContainerComponent implements OnInit, OnDestroy {
     this.subscription?.unsubscribe();
   }
 
-  scratchCellWithId(cellId: number) {
+  public scratchCellWithId(cellId: number) {
     if (!this.playerName) {
       return;
     }
@@ -70,6 +71,14 @@ export class GridContainerComponent implements OnInit, OnDestroy {
       });
   }
 
+  public toggleZoom() {
+    if (this.renderSize === 'zoomedIn') {
+      this.renderSize = 'zoomedOut';
+    } else if (this.renderSize === 'zoomedOut') {
+      this.renderSize = 'zoomedIn';
+    }
+  }
+
   public getClassForCell(cell: Cell): string {
     switch (cell.cellContent) {
       case CellContent.consolationPrize:
@@ -81,9 +90,9 @@ export class GridContainerComponent implements OnInit, OnDestroy {
     }
   }
 
-  public get cells() {
+  public get cells(): Cell[] {
     if (!this.grid || !this.grid.cells) {
-      return;
+      return [];
     }
     return this.grid.cells;
   }

@@ -20,14 +20,48 @@
       >
     </span>
   </div>
+  <div>
+    <button
+      mat-stroked-button
+      color="primary"
+      *ngIf="renderSize === 'zoomedIn'"
+      (click)="toggleZoom()"
+    >
+      Verklein de kalendar
+    </button>
+  </div>
+  <div>
+    <button
+      mat-stroked-button
+      color="primary"
+      *ngIf="renderSize === 'zoomedOut'"
+      (click)="toggleZoom()"
+    >
+      Vergroot de kalendar
+    </button>
+  </div>
 
-  <mat-grid-list cols="100" rowHeight="1:1">
+  <div class="d-flex">
+    <div *ngIf="renderSize === 'zoomedIn'" class="overflow-container">
+      <mat-grid-list cols="100" class="big-grid">
+        <mat-grid-tile
+          (click)="scratchCellWithId(cell.id)"
+          [ngClass]="getClassForCell(cell)"
+          class="hover-scratch-cell-large"
+          *ngFor="let cell of cells; let i = index"
+          >{{ i }}</mat-grid-tile
+        >
+      </mat-grid-list>
+    </div>
+  </div>
+
+  <mat-grid-list *ngIf="renderSize === 'zoomedOut'" cols="100" rowHeight="2:1">
     <mat-grid-tile
       (click)="scratchCellWithId(cell.id)"
       [ngClass]="getClassForCell(cell)"
-      class="hover-scratch-cell"
+      class="hover-scratch-cell-small"
       *ngFor="let cell of cells; let i = index"
-      >{{ i < 100 ? i : null }}</mat-grid-tile
+      >{{ i }}</mat-grid-tile
     >
   </mat-grid-list>
 </ng-container>
