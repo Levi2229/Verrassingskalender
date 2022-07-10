@@ -1,4 +1,4 @@
-<ng-container *ngIf="hasLoaded && originalGrid; else notLoaded">
+<ng-container *ngIf="hasLoaded && grid; else notLoaded">
   <div class="d-flex legend">
     <span class="d-flex p-1">
       <div class="tile-small empty d-flex"></div>
@@ -21,7 +21,7 @@
     </span>
   </div>
 
-  <mat-grid-list cols="100" rowHeight="2:1">
+  <mat-grid-list cols="100" rowHeight="1:1">
     <mat-grid-tile
       (click)="scratchCellWithId(cell.id)"
       [ngClass]="getClassForCell(cell)"

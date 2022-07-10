@@ -1,23 +1,24 @@
 import { GridDataService } from '../../../services/grid-data.service';
 import { ScratchGrid } from '../../../models/scratch-grid.model';
 import { AppStateService } from '../../../services/app-state.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CellContent } from 'src/app/models/cell-enum.model';
 import { PrizeRevealDialogComponent } from '../prize-reveal-dialog/prize-reveal-dialog.component';
 import { Router } from '@angular/router';
 import { Cell } from 'src/app/models/cell.model';
-import { finalize } from 'node_modules/rxjs';
+import { finalize, Subscription } from 'node_modules/rxjs';
 
 @Component({
   selector: 'app-grid-container',
   templateUrl: './grid-container.component.html',
   styleUrls: ['./grid-container.component.scss'],
 })
-export class GridContainerComponent implements OnInit {
-  originalGrid: ScratchGrid | undefined;
+export class GridContainerComponent implements OnInit, OnDestroy {
+  grid: ScratchGrid | undefined;
   playerName: string | undefined;
   hasLoaded: boolean | undefined;
+  subscription: Subscription | undefined;
 
   constructor(
     private readonly dialog: MatDialog,
@@ -34,12 +35,23 @@ export class GridContainerComponent implements OnInit {
       return;
     }
 
-    this.gridDataService
-      .getGrid()
-      .pipe(finalize(() => (this.hasLoaded = true)))
-      .subscribe((result) => {
-        this.originalGrid = result;
-      });
+    var gridFromState = this.appStateService.getGrid();
+    if (gridFromState === undefined) {
+      this.subscription = this.gridDataService
+        .getGrid()
+        .pipe(finalize(() => (this.hasLoaded = true)))
+        .subscribe((result) => {
+          this.grid = result;
+          this.appStateService.setGrid(result);
+        });
+    } else {
+      this.grid = gridFromState;
+      this.hasLoaded = true;
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
 
   scratchCellWithId(cellId: number) {
@@ -49,9 +61,7 @@ export class GridContainerComponent implements OnInit {
     this.gridDataService
       .scratchCell(cellId, this.playerName)
       .subscribe((result) => {
-        const cellAtPosition = this.originalGrid?.cells.find(
-          (og) => og.id === cellId
-        );
+        const cellAtPosition = this.grid?.cells.find((og) => og.id === cellId);
         if (!cellAtPosition) {
           return;
         }
@@ -72,10 +82,10 @@ export class GridContainerComponent implements OnInit {
   }
 
   public get cells() {
-    if (!this.originalGrid || !this.originalGrid.cells) {
+    if (!this.grid || !this.grid.cells) {
       return;
     }
-    return this.originalGrid.cells;
+    return this.grid.cells;
   }
 
   private openDialog(

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Verrassingskalender_Api.Database;
 using Verrassingskalender_Api.Services;
@@ -49,6 +50,15 @@ app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 
+// Converts exceptions to consumable error message.
+app.UseExceptionHandler(c => c.Run(async context =>
+{
+    var exception = context.Features
+        .Get<IExceptionHandlerPathFeature>()
+        .Error;
+    var response = new { message = exception.Message };
+    await context.Response.WriteAsJsonAsync(response);
+}));
 app.MapControllers();
 
 app.Run();

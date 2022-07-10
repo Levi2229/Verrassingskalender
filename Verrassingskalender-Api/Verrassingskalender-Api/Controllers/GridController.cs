@@ -19,22 +19,26 @@ namespace Verrassingskalender_Api.Controllers
         }
 
         [HttpGet]
-        public async Task<GridViewModel> Get()
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GridViewModel))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Get()
         {
-            return await GridService.GetGridViewModel();
+            return Ok(await GridService.GetGridViewModel());
         }
 
         [HttpPost("scratchGridCell")]
-        public async Task<CellContent> PostScratchGridCell(ScratchGridCellRequest scratchGridCellRequest)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CellContent))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> PostScratchGridCell(ScratchGridCellRequest scratchGridCellRequest)
         {
-            return await GridService.ScratchGridCell(scratchGridCellRequest);
+            return Ok(await GridService.ScratchGridCell(scratchGridCellRequest));
         }
 
         //Opdracht notitie: Deze methode zou normaal gesproken beschermt zijn met een [Authorize] attribuut, met mogelijk rollen systeem voor Admin rol.
         [HttpPost("generateGrid")]
-        public async Task GenerateGrid()
+        public async Task<IActionResult> GenerateGrid()
         {
-            await GridFactory.GenerateGrid();
+            return Ok(await GridFactory.GenerateGrid());
         }
     }
 }

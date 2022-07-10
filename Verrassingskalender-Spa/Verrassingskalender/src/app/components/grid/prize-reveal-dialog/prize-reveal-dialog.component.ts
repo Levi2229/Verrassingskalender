@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { CellContent } from 'src/app/models/cell-enum.model';
 
 @Component({
@@ -11,7 +12,8 @@ export class PrizeRevealDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<PrizeRevealDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public prize: CellContent
+    @Inject(MAT_DIALOG_DATA) public prize: CellContent,
+    private readonly router: Router
   ) {}
 
   /* Uitbreiding voor echte situatie: Enums kunnen veranderen, dus mappen op de integer value van enum is niet handig.
@@ -28,5 +30,10 @@ export class PrizeRevealDialogComponent {
       default:
         return 'Er is iets misgegaan.';
     }
+  }
+
+  public navigateToLandingPage(): void {
+    this.dialogRef.close();
+    this.router.navigateByUrl('');
   }
 }

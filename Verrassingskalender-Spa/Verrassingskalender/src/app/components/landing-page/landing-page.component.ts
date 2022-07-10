@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { resources } from 'src/app/resources/resources-nl.model';
 import { AppStateService } from '../../services/app-state.service';
+import { GridDataService } from '../../services/grid-data.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -16,6 +17,7 @@ export class LandingPageComponent implements OnInit {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly appStateService: AppStateService,
+    private readonly gridDataService: GridDataService,
     private readonly router: Router
   ) {
     this.nameForm = this.formBuilder.group({
@@ -23,7 +25,11 @@ export class LandingPageComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.gridDataService.getGrid().subscribe((result) => {
+      this.appStateService.setGrid(result);
+    });
+  }
 
   tryNavigateToScratchGrid() {
     this.nameForm.controls.name.markAsDirty();
