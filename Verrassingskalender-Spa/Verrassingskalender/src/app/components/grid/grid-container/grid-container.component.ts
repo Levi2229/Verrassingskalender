@@ -20,6 +20,7 @@ export class GridContainerComponent implements OnInit, OnDestroy {
   hasLoaded: boolean | undefined;
   subscription: Subscription | undefined;
   renderSize = 'zoomedIn';
+  chosenCellId: number | undefined;
 
   constructor(
     private readonly dialog: MatDialog,
@@ -66,6 +67,7 @@ export class GridContainerComponent implements OnInit, OnDestroy {
         if (!cellAtPosition) {
           return;
         }
+        this.chosenCellId = cellAtPosition.id;
         cellAtPosition.cellContent = result;
         this.openDialog('2500', '2500', result);
       });
@@ -80,14 +82,18 @@ export class GridContainerComponent implements OnInit, OnDestroy {
   }
 
   public getClassForCell(cell: Cell): string {
+    let classes = '';
     switch (cell.cellContent) {
       case CellContent.consolationPrize:
-        return 'consolation-prize';
+        classes += 'consolation-prize';
+        break;
       case CellContent.grandPrize:
-        return 'grand-prize';
+        classes += 'grand-prize';
+        break;
       case CellContent.noPrize:
-        return 'no-prize';
+        classes += 'no-prize';
     }
+    return classes + (this.chosenCellId === cell.id ? ' chosen-cell' : '');
   }
 
   public get cells(): Cell[] {
@@ -102,11 +108,15 @@ export class GridContainerComponent implements OnInit, OnDestroy {
     exitAnimationDuration: string,
     prize: CellContent
   ): void {
-    this.dialog.open(PrizeRevealDialogComponent, {
-      width: '500px',
-      data: prize,
-      enterAnimationDuration,
-      exitAnimationDuration,
-    } as any);
+    setTimeout(
+      () =>
+        this.dialog.open(PrizeRevealDialogComponent, {
+          width: '500px',
+          data: prize,
+          enterAnimationDuration,
+          exitAnimationDuration,
+        } as any),
+      2000
+    );
   }
 }

@@ -1,39 +1,44 @@
-.hover-scratch-cell-small {
-  &:hover {
-    cursor: pointer;
-    border: 2px solid black;
-  }
-}
-
-.hover-scratch-cell-large {
+.hover-scratch-cell {
   height: 50px;
   width: 50px;
   display: inline-block;
-  background-color: white;
   border: 1px solid black;
   &:hover {
     cursor: pointer;
     border: 2px solid black;
   }
-  .mat-grid-tile-content {
-    margin-bottom: 1px;
-    bottom: 1px;
-  }
+
+  background: linear-gradient(white, white 50%, green 50%, green);
+  background-size: 100% 200%;
+  /*trasition effect for background*/
+  transition: background 4s, transform 0.8s ease-in-out;
 }
+
 .empty {
   border: 1px solid black;
 }
+
+.chosen-cell {
+  z-index: 99;
+  transform: scale(2, 2);
+}
+
 .no-prize {
-  background-color: grey;
-  transition: background-color 0.5s ease-in-out;
+  background: linear-gradient(white, white 50%, grey 50%, grey);
+  background-size: 100% 200%;
+  background-position: -100% -100%;
 }
+
 .consolation-prize {
-  background-color: green;
-  transition: background-color 0.5s ease-in-out;
+  background: linear-gradient(white, white 50%, green 50%, green);
+  background-size: 100% 200%;
+  background-position: -100% -100%;
 }
+
 .grand-prize {
-  background-color: yellow;
-  transition: background-color 0.5s ease-in-out;
+  background: linear-gradient(white, white 50%, yellow 50%, yellow);
+  background-size: 100% 200%;
+  background-position: -100% -100%;
 }
 
 .tile-small {
@@ -49,9 +54,4 @@
 .overflow-container {
   height: 89vh;
   width: 100vw;
-  overflow: scroll;
-}
-
-mat-grid-tile {
-  border: 1px solid black;
 }
