@@ -116,7 +116,7 @@ export class GridContainerComponent implements OnInit, OnDestroy {
           enterAnimationDuration,
           exitAnimationDuration,
         } as any),
-      2000
+      3000
     );
   }
 }
