@@ -39,7 +39,8 @@ namespace Verrassingskalender_Api.Controllers
         public async Task<IActionResult> GenerateGrid()
         {
             // Opmerking: Deze methode eigenlijk bloated, hij doet nu genereren en opslaan zonder dat dat duidelijk is uit de naam.
-            return Ok(await GridFactory.GenerateGrid());
+            _ = await GridFactory.GenerateGrid();
+            return Ok();
         }
     }
 }
