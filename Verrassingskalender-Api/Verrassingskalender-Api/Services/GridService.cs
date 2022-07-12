@@ -47,7 +47,7 @@ namespace Verrassingskalender_Api.Services
 
             if (grid.Cells.Any(c => c.Player?.Name == scratchGridCellRequest.PlayerName))
             {
-                // Improvement: normally this would be a different exception type, i.e. DomainExcption. Handled differentlyto indicate a user error, not a 500.
+                // Opmerking: Exception zou eigenlijk net zoals in VerrassingsKalenderRepository moeten, met HttpException.
                 throw new Exception($"U hebt al een vakje gekrast met speler naam: {scratchGridCellRequest.PlayerName}");
             }
 

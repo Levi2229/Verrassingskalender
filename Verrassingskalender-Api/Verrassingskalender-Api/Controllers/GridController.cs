@@ -34,10 +34,11 @@ namespace Verrassingskalender_Api.Controllers
             return Ok(await GridService.ScratchGridCell(scratchGridCellRequest));
         }
 
-        //Opdracht notitie: Deze methode zou normaal gesproken beschermt zijn met een [Authorize] attribuut, met mogelijk rollen systeem voor Admin rol.
+        // Opmerking: Deze methode zou normaal gesproken beschermt zijn met een [Authorize] attribuut, met mogelijk rollen systeem voor Admin rol.
         [HttpPost("generateGrid")]
         public async Task<IActionResult> GenerateGrid()
         {
+            // Opmerking: Deze methode eigenlijk bloated, hij doet nu genereren en opslaan zonder dat dat duidelijk is uit de naam.
             return Ok(await GridFactory.GenerateGrid());
         }
     }
