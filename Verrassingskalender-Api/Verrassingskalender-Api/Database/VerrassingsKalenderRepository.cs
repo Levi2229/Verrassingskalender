@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Net;
-using System.Web.Http;
 using Verrassingskalender_Api.Models;
 
 namespace Verrassingskalender_Api.Database
@@ -24,8 +22,9 @@ namespace Verrassingskalender_Api.Database
 
             if (grid == null)
             {
+                // Opmerking: in een echte applicatie zou je betere Exception types hebben en een middleware o.i.d. voor handling.
                 var message = $"Grid with id {id} not found";
-                ThrowHttpNotFoundError(message);
+                throw new Exception(message);
             }
             return grid;
         }
@@ -36,21 +35,9 @@ namespace Verrassingskalender_Api.Database
             if (cell == null)
             {
                 // Opmerking: Normaal gesproken zou je dit ook loggen, zodat je op productie kan zien wat er fout gegaan in.
-                ThrowHttpNotFoundError($"Cell with id {cellId} not found.");
+                throw new Exception($"Cell with id {cellId} not found.");
             }
             return cell;
-        }
-
-        //Opmerking: dit zou normaal gesproken in een exception handling middleware o.i.d. gedaan worden.
-        private void ThrowHttpNotFoundError(string message) 
-        {
-            var response = new HttpResponseMessage(HttpStatusCode.NotFound)
-            {
-                Content = new StringContent(message),
-                ReasonPhrase = message
-            };
-            // Opmerking: Normaal gesproken zou je dit ook loggen, zodat je op productie kan zien wat er fout gegaan in.
-            throw new HttpResponseException(response);
         }
     }
 }
